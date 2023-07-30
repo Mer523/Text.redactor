@@ -1,5 +1,6 @@
 from tkinter import *
 from tkinter.filedialog import *
+from tkinter.messagebox import *
 import fileinput
 
 def _open():
@@ -18,6 +19,16 @@ def _save():
     f.write(content)
     f.close()
 
+
+def close_win():
+    if askyesno("Выход", "Вы уверены?"):
+        root.destroy()
+
+
+def about():
+    showinfo("Редактор", "Простейший текстовый редактор")
+
+
 root = Tk()
 
 m = Menu(root)
@@ -27,6 +38,12 @@ fm = Menu(m)
 m.add_cascade(label="Файл", menu=fm)
 fm.add_command(label="Открыть...", command=_open)
 fm.add_command(label="Сохранить как...", command=_save)
+fm.add_command(label="Выход", command=close_win)
+
+hm = Menu(m)
+m.add_cascade(label="Справка", menu=hm)
+hm.add_command(label="О программе", command=about)
+
 
 txt = Text(root, width=60, height=30, font="Courier 10")
 txt.pack()
